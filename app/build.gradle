@@ -45,4 +45,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui:1.0.0"
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+
+    // Lifecycle
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 }
