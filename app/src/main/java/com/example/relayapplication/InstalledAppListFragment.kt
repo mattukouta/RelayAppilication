@@ -22,17 +22,6 @@ class InstalledAppListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener {
-
-//            val count = fragmentManager?.backStackEntryCount
-//            Log.d("check", count.toString())
-//            if (count != null) {
-//                if (count > 2) {
-//                    findNavController().popBackStack()
-//                }
-//            }
-
-//            findNavController().navigate(R.id.action_installedToSelected)
-        }
+        activity?.actionBar?.title  = "インストールアプリ一覧"
     }
 }
