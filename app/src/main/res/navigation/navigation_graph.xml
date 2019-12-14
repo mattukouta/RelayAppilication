@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/InstalledAppListFragment">
+
+    <custom_fragment
+        android:id="@+id/InstalledAppListFragment"
+        android:name="com.example.relayapplication.InstalledAppListFragment"
+        android:label="fragment_installList"
+        android:tag = "tab1">
+<!--        tools:layout="@layout/fragment_installed_app_list" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_installedToSelected"-->
+<!--            app:destination="@id/SelectedAppListFragment"/>-->
+    </custom_fragment>
+
+    <custom_fragment
+        android:id="@+id/SelectedAppListFragment"
+        android:name="com.example.relayapplication.SelectedAppListFragment"
+        android:label="fragment_selectedList"
+        android:tag = "tab2">
+<!--        tools:layout="@layout/fragment_selected_app_list" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_selectedToInstalled"-->
+<!--            app:destination="@id/InstalledAppListFragment"/>-->
+    </custom_fragment>
+
+</navigation>
