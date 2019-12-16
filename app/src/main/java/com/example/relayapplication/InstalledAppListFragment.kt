@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_installed_app_list.*
 
 class InstalledAppListFragment : Fragment() {
@@ -26,7 +27,10 @@ class InstalledAppListFragment : Fragment() {
 
         activity?.actionBar?.title  = "インストールアプリ一覧"
 
-        getInstalledApp()
+        val list = getInstalledApp()
+
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.adapter = context?.let { InstalledAppListAdapter(it, list) }
     }
 
     @SuppressLint("LongLogTag")
@@ -44,16 +48,21 @@ class InstalledAppListFragment : Fragment() {
                     val appName = packageInfo.applicationInfo.loadLabel(packageManager).toString()
                     val appIcon = packageInfo.applicationInfo.loadIcon(packageManager)
                     val className = packageManager.getLaunchIntentForPackage(packageInfo.packageName)?.component?.className + ""
-                    Log.i("check:起動可能なパッケージ名", packageName)
-                    Log.i("check:起動可能なクラス名", className)
+//                    Log.i("check:起動可能なパッケージ名", packageName)
+//                    Log.i("check:起動可能なクラス名", className)
                     packageList.add(ApplicationInfo(appName, appIcon, packageName, className))
                 } else {
-                    Log.i("check:----------起動不可能なパッケージ名", packageInfo.packageName)
+//                    Log.i("check:----------起動不可能なパッケージ名", packageInfo.packageName)
                 }
             }
 //            Log.d("checkList", packageList[0].toString())
         }
 
         return packageList
+    }
+
+    // アプリ終了時など
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
