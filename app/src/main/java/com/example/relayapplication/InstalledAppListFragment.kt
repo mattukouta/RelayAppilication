@@ -9,28 +9,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.relayapplication.databinding.FragmentInstalledAppListBinding
+import com.example.relayapplication.databinding.InstalledAppListItemBinding
 import kotlinx.android.synthetic.main.fragment_installed_app_list.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class InstalledAppListFragment : Fragment() {
+
+    lateinit var binding: FragmentInstalledAppListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_installed_app_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_installed_app_list, container, false)
+        binding.viewModel = ViewModelProviders.of(this).get(InstalledAppViewModel::class.java)
+        binding.lifecycleOwner = this
+        binding.recyclerView.adapter = activity?.applicationContext?.let { InstalledAppListAdapter(arrayListOf(), it) }
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+//        binding.recyclerView.adapter =
+
+        binding.viewModel!!.appList.observe(this, Observer {
+            val adapter = binding.recyclerView.adapter as InstalledAppListAdapter
+            adapter.setData(it)
+        })
+        this.binding = binding
+
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getInstalledApp()
+//        this.binding.viewModel!!.addList(getInstalledApp())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         activity?.actionBar?.title  = "インストールアプリ一覧"
-
-        getInstalledApp()
     }
 
     @SuppressLint("LongLogTag")
-    fun getInstalledApp(): ArrayList<ApplicationInfo> {
+    fun getInstalledApp(): Job = GlobalScope.launch {
         val packageList = ArrayList<ApplicationInfo>()
         val packageManager = activity?.packageManager
 
@@ -44,16 +73,21 @@ class InstalledAppListFragment : Fragment() {
                     val appName = packageInfo.applicationInfo.loadLabel(packageManager).toString()
                     val appIcon = packageInfo.applicationInfo.loadIcon(packageManager)
                     val className = packageManager.getLaunchIntentForPackage(packageInfo.packageName)?.component?.className + ""
-                    Log.i("check:起動可能なパッケージ名", packageName)
-                    Log.i("check:起動可能なクラス名", className)
+//                    Log.i("check:起動可能なパッケージ名", packageName)
+//                    Log.i("check:起動可能なクラス名", className)
                     packageList.add(ApplicationInfo(appName, appIcon, packageName, className))
+//                    binding.viewModel!!.addList(ApplicationInfo(appName, appIcon, packageName, className))
                 } else {
-                    Log.i("check:----------起動不可能なパッケージ名", packageInfo.packageName)
+//                    Log.i("check:----------起動不可能なパッケージ名", packageInfo.packageName)
                 }
             }
 //            Log.d("checkList", packageList[0].toString())
+            binding.viewModel!!.addList(packageList)
         }
+    }
 
-        return packageList
+    // アプリ終了時など
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
