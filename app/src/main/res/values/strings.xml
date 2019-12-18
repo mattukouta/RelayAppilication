@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bottom_title_app_list">アプリ一覧</string>
     <string name="bottom_title_intent_list">お気に入り一覧</string>
+    <string name="entry_dialog_hint">アプリ名を入力</string>
+    <string name="selected_app_text">選択したアプリ</string>
+    <string name="entry_app_text">登録するアプリ名を入力してください</string>
 </resources>

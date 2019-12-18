@@ -1,16 +1,13 @@
 package com.example.relayapplication
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.relayapplication.databinding.InstalledAppListItemBinding
 
-class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val context: Context): RecyclerView.Adapter<myHolder>(){
-
+class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val context: Context, val listener: InstallAdapterListener): RecyclerView.Adapter<myHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myHolder {
         val binding = DataBindingUtil.inflate<InstalledAppListItemBinding>(LayoutInflater.from(parent.context), R.layout.installed_app_list_item, parent, false)
@@ -30,7 +27,7 @@ class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val con
         }
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
+            listener.onItemVIewClickListener(position, appList)
         }
     }
 
