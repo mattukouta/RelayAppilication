@@ -4,24 +4,20 @@ package com.example.relayapplication
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.relayapplication.databinding.FragmentInstalledAppListBinding
-import com.example.relayapplication.databinding.InstalledAppListItemBinding
-import kotlinx.android.synthetic.main.fragment_installed_app_list.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class InstalledAppListFragment : Fragment() {
+class InstalledAppListFragment : Fragment(), InstallAdapterListener {
 
     lateinit var binding: FragmentInstalledAppListBinding
 
@@ -32,10 +28,9 @@ class InstalledAppListFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_installed_app_list, container, false)
         binding.viewModel = ViewModelProviders.of(this).get(InstalledAppViewModel::class.java)
         binding.lifecycleOwner = this
-        binding.recyclerView.adapter = activity?.applicationContext?.let { InstalledAppListAdapter(arrayListOf(), it) }
+        binding.recyclerView.adapter = activity?.applicationContext?.let { InstalledAppListAdapter(arrayListOf(), it, this) }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-//        binding.recyclerView.adapter =
 
         binding.viewModel!!.appList.observe(this, Observer {
             val adapter = binding.recyclerView.adapter as InstalledAppListAdapter
@@ -49,7 +44,19 @@ class InstalledAppListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         getInstalledApp()
-//        this.binding.viewModel!!.addList(getInstalledApp())
+    }
+
+    /**
+     * RecyclerViewのitemクリック時
+     */
+    override fun onItemVIewClickListener(
+        position: Int,
+        appList: MutableList<ApplicationInfo>
+    ) {
+//        Toast.makeText(activity, position.toString(), Toast.LENGTH_SHORT).show()
+
+        val dialog = EntryDialog(position, appList)
+        fragmentManager?.let { dialog.show(it, "entry") }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
