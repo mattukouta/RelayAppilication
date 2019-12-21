@@ -17,7 +17,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class InstalledAppListFragment : Fragment(), InstallAdapterListener {
+
+
+class InstalledAppListFragment : Fragment(), InstallAdapterListener, EntryDialogListener {
 
     lateinit var binding: FragmentInstalledAppListBinding
 
@@ -38,6 +40,10 @@ class InstalledAppListFragment : Fragment(), InstallAdapterListener {
         })
         this.binding = binding
 
+//        if (context is DialogListener) {
+//            listener = context as DialogListener
+//        }
+
         return binding.root
     }
 
@@ -50,14 +56,26 @@ class InstalledAppListFragment : Fragment(), InstallAdapterListener {
      * RecyclerViewのitemクリック時
      */
     override fun onItemVIewClickListener(
-        position: Int,
-        appList: MutableList<ApplicationInfo>
+        item: ApplicationInfo
     ) {
-//        Toast.makeText(activity, position.toString(), Toast.LENGTH_SHORT).show()
-
-        val dialog = EntryDialog(position, appList)
+        val dialog = EntryDialog(item, this)
         fragmentManager?.let { dialog.show(it, "entry") }
     }
+
+    /**
+     * 登録用のダイアログの"OK"クリック時
+     */
+    override fun addEntry(item: ApplicationInfo, entryName: String) {
+
+        val appList = ArrayList<SelectApplicationInfo>()
+        appList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
+        appList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
+        appList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
+        appList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
+
+        SelectApp.selectAppList = appList
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

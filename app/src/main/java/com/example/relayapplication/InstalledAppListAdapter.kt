@@ -7,19 +7,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.relayapplication.databinding.InstalledAppListItemBinding
 
-class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val context: Context, val listener: InstallAdapterListener): RecyclerView.Adapter<myHolder>(){
+class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val context: Context, val listener: InstallAdapterListener): RecyclerView.Adapter<InstalledAppListViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InstalledAppListViewHolder {
         val binding = DataBindingUtil.inflate<InstalledAppListItemBinding>(LayoutInflater.from(parent.context), R.layout.installed_app_list_item, parent, false)
 
-        return myHolder(binding)
+        return InstalledAppListViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return appList.size
     }
 
-    override fun onBindViewHolder(holder: myHolder, position: Int) {
+    override fun onBindViewHolder(holder: InstalledAppListViewHolder, position: Int) {
         val item = appList[position]
         holder.binding.viewModel = ApplicationInfo(item.appName, item.appIcon, item.packageName, item.className)
         with(holder.binding.root) {
@@ -27,7 +27,7 @@ class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val con
         }
 
         holder.itemView.setOnClickListener {
-            listener.onItemVIewClickListener(position, appList)
+            listener.onItemVIewClickListener(appList[position])
         }
     }
 
@@ -36,4 +36,3 @@ class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val con
         notifyDataSetChanged()
     }
 }
-class myHolder(val binding: InstalledAppListItemBinding): RecyclerView.ViewHolder(binding.root)

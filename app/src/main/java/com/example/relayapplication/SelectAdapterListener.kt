@@ -1,7 +1,7 @@
 package com.example.relayapplication
 
-interface InstallAdapterListener {
+interface SelectAdapterListener {
     fun onItemVIewClickListener(
-        item: ApplicationInfo
+        item: SelectApplicationInfo
     )
 }

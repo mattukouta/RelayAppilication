@@ -40,7 +40,7 @@ class CustomNavigator(
         }
 
         var fragment = manager.findFragmentByTag(tag)
-        if (fragment == null) {
+        if (fragment == null || className == "com.example.relayapplication.SelectedAppListFragment") {
             fragment = instantiateFragment(context, manager, className, args)
             transaction.add(containerId, fragment, tag)
         }
