@@ -67,13 +67,8 @@ class InstalledAppListFragment : Fragment(), InstallAdapterListener, EntryDialog
      */
     override fun addEntry(item: ApplicationInfo, entryName: String) {
 
-        val appList = ArrayList<SelectApplicationInfo>()
-        appList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
-        appList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
-        appList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
-        appList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
+        SelectApp.selectAppList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
 
-        SelectApp.selectAppList = appList
     }
 
 

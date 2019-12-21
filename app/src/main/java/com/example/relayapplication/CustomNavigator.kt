@@ -40,9 +40,13 @@ class CustomNavigator(
         }
 
         var fragment = manager.findFragmentByTag(tag)
-        if (fragment == null || className == "com.example.relayapplication.SelectedAppListFragment") {
+        if (fragment == null || (SelectApp.selectAppList.size != SelectApp.selectAppListSize)) {
             fragment = instantiateFragment(context, manager, className, args)
             transaction.add(containerId, fragment, tag)
+
+            if (className == "com.example.relayapplication.SelectedAppListFragment") {
+                SelectApp.selectAppListSize = SelectApp.selectAppList.size
+            }
         }
         fragment.arguments = args
 
