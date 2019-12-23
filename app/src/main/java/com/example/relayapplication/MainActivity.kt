@@ -13,6 +13,7 @@ import android.graphics.drawable.BitmapDrawable
 import java.io.ByteArrayOutputStream
 import android.graphics.BitmapFactory
 import androidx.core.graphics.drawable.toBitmap
+import com.example.relayapplication.dataclass.SelectApplicationInfo
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +43,15 @@ class MainActivity : AppCompatActivity() {
 
             val image = BitmapDrawable(resources, bitmap)
 
-            appList.add(SelectApplicationInfo(items.appName, image, items.entryName, items.appPackage, items.appClass))
+            appList.add(
+                SelectApplicationInfo(
+                    items.appName,
+                    image,
+                    items.entryName,
+                    items.appPackage,
+                    items.appClass
+                )
+            )
         }
 
         SelectApp.selectAppList = appList

@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.relayapplication.SelectedAppViewModel" />
+            type="com.example.relayapplication.selectapplist.SelectedAppViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SelectedAppListFragment">
+        tools:context=".selectapplist.SelectedAppListFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

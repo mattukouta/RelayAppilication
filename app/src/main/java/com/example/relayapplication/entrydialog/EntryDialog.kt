@@ -1,14 +1,15 @@
-package com.example.relayapplication
+package com.example.relayapplication.entrydialog
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-
+import com.example.relayapplication.dataclass.ApplicationInfo
+import com.example.relayapplication.callbacklistener.EntryDialogListener
+import com.example.relayapplication.R
 
 
 class EntryDialog(val item: ApplicationInfo, val listener: EntryDialogListener) : DialogFragment() {

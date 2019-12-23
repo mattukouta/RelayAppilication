@@ -1,4 +1,4 @@
-package com.example.relayapplication
+package com.example.relayapplication.installapplist
 
 
 import android.annotation.SuppressLint
@@ -12,6 +12,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.relayapplication.dataclass.ApplicationInfo
+import com.example.relayapplication.callbacklistener.EntryDialogListener
+import com.example.relayapplication.callbacklistener.InstallAdapterListener
+import com.example.relayapplication.entrydialog.EntryDialog
+import com.example.relayapplication.R
+import com.example.relayapplication.SelectApp
+import com.example.relayapplication.dataclass.SelectApplicationInfo
 import com.example.relayapplication.databinding.FragmentInstalledAppListBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -19,7 +26,9 @@ import kotlinx.coroutines.launch
 
 
 
-class InstalledAppListFragment : Fragment(), InstallAdapterListener, EntryDialogListener {
+class InstalledAppListFragment : Fragment(),
+    InstallAdapterListener,
+    EntryDialogListener {
 
     lateinit var binding: FragmentInstalledAppListBinding
 
@@ -27,10 +36,17 @@ class InstalledAppListFragment : Fragment(), InstallAdapterListener, EntryDialog
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_installed_app_list, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_installed_app_list, container, false)
         binding.viewModel = ViewModelProviders.of(this).get(InstalledAppViewModel::class.java)
         binding.lifecycleOwner = this
-        binding.recyclerView.adapter = activity?.applicationContext?.let { InstalledAppListAdapter(arrayListOf(), it, this) }
+        binding.recyclerView.adapter = activity?.applicationContext?.let {
+            InstalledAppListAdapter(
+                arrayListOf(),
+                it,
+                this
+            )
+        }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
 
@@ -67,7 +83,15 @@ class InstalledAppListFragment : Fragment(), InstallAdapterListener, EntryDialog
      */
     override fun addEntry(item: ApplicationInfo, entryName: String) {
 
-        SelectApp.selectAppList.add(SelectApplicationInfo(item.appName, item.appIcon, entryName, item.packageName, item.className))
+        SelectApp.selectAppList.add(
+            SelectApplicationInfo(
+                item.appName,
+                item.appIcon,
+                entryName,
+                item.packageName,
+                item.className
+            )
+        )
 
     }
 
@@ -95,7 +119,14 @@ class InstalledAppListFragment : Fragment(), InstallAdapterListener, EntryDialog
                     val className = packageManager.getLaunchIntentForPackage(packageInfo.packageName)?.component?.className + ""
 //                    Log.i("check:起動可能なパッケージ名", packageName)
 //                    Log.i("check:起動可能なクラス名", className)
-                    packageList.add(ApplicationInfo(appName, appIcon, packageName, className))
+                    packageList.add(
+                        ApplicationInfo(
+                            appName,
+                            appIcon,
+                            packageName,
+                            className
+                        )
+                    )
 //                    binding.viewModel!!.addList(ApplicationInfo(appName, appIcon, packageName, className))
                 } else {
 //                    Log.i("check:----------起動不可能なパッケージ名", packageInfo.packageName)

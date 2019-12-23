@@ -1,4 +1,4 @@
-package com.example.relayapplication
+package com.example.relayapplication.selectapplist
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.relayapplication.callbacklistener.SelectAdapterListener
+import com.example.relayapplication.R
+import com.example.relayapplication.SelectApp
+import com.example.relayapplication.dataclass.SelectApplicationInfo
 import com.example.relayapplication.databinding.FragmentSelectedAppListBinding
 
-class SelectedAppListFragment : Fragment(), SelectAdapterListener {
+class SelectedAppListFragment : Fragment(),
+    SelectAdapterListener {
 
     lateinit var binding: FragmentSelectedAppListBinding
 
@@ -21,11 +26,18 @@ class SelectedAppListFragment : Fragment(), SelectAdapterListener {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_selected_app_list, container, false)
+            DataBindingUtil.inflate(inflater,
+                R.layout.fragment_selected_app_list, container, false)
         binding.viewModel = ViewModelProviders.of(this).get(SelectedAppViewModel::class.java)
         binding.lifecycleOwner = this
         binding.recyclerView.adapter =
-            activity?.applicationContext?.let { SelectedAppListAdapter(arrayListOf(), it, this) }
+            activity?.applicationContext?.let {
+                SelectedAppListAdapter(
+                    arrayListOf(),
+                    it,
+                    this
+                )
+            }
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.viewModel!!.selectAppList.observe(this, Observer {
             val adapter = binding.recyclerView.adapter as SelectedAppListAdapter

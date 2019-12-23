@@ -1,4 +1,4 @@
-package com.example.relayapplication
+package com.example.relayapplication.dataclass
 
 import android.graphics.drawable.Drawable
 

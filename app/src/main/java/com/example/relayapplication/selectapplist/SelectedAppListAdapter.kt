@@ -1,15 +1,19 @@
-package com.example.relayapplication
+package com.example.relayapplication.selectapplist
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.relayapplication.callbacklistener.SelectAdapterListener
+import com.example.relayapplication.R
+import com.example.relayapplication.dataclass.SelectApplicationInfo
 import com.example.relayapplication.databinding.SelectedAppListItemBinding
 
 class SelectedAppListAdapter(var selectAppList: MutableList<SelectApplicationInfo>, val context: Context, val listener: SelectAdapterListener): RecyclerView.Adapter<SelectedAppListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectedAppListViewHolder {
-        val binding = DataBindingUtil.inflate<SelectedAppListItemBinding>(LayoutInflater.from(parent.context), R.layout.selected_app_list_item, parent, false)
+        val binding = DataBindingUtil.inflate<SelectedAppListItemBinding>(LayoutInflater.from(parent.context),
+            R.layout.selected_app_list_item, parent, false)
 
         return SelectedAppListViewHolder(binding)
     }
@@ -20,7 +24,13 @@ class SelectedAppListAdapter(var selectAppList: MutableList<SelectApplicationInf
 
     override fun onBindViewHolder(holder: SelectedAppListViewHolder, position: Int) {
         val item = selectAppList[position]
-        holder.binding.viewModel = SelectApplicationInfo(item.appName, item.appIcon, item.entryAppName, item.packageName, item.packageClass)
+        holder.binding.viewModel = SelectApplicationInfo(
+            item.appName,
+            item.appIcon,
+            item.entryAppName,
+            item.packageName,
+            item.packageClass
+        )
         with(holder.binding.root) {
             tag = item
         }
