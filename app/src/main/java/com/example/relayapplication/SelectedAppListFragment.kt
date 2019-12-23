@@ -1,5 +1,6 @@
 package com.example.relayapplication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,6 +46,10 @@ class SelectedAppListFragment : Fragment(), SelectAdapterListener {
     }
 
     override fun onItemVIewClickListener(item: SelectApplicationInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.action = "android.intent.category.LAUNCHER"
+        intent.setClassName(item.packageName, item.packageClass)
+        startActivity(intent)
     }
 }
