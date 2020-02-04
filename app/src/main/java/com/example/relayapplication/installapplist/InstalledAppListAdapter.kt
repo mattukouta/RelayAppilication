@@ -3,12 +3,14 @@ package com.example.relayapplication.installapplist
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.relayapplication.dataclass.ApplicationInfo
 import com.example.relayapplication.callbacklistener.InstallAdapterListener
 import com.example.relayapplication.R
 import com.example.relayapplication.databinding.InstalledAppListItemBinding
+import kotlinx.android.synthetic.main.selected_app_list_item.view.*
 
 class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val context: Context, val listener: InstallAdapterListener): RecyclerView.Adapter<InstalledAppListViewHolder>(){
 
@@ -38,6 +40,10 @@ class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val con
         holder.itemView.setOnClickListener {
             listener.onItemVIewClickListener(appList[position])
         }
+
+//        holder.itemView.deleteImage.setOnClickListener {
+//            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
+//        }
     }
 
     fun setData(items: MutableList<ApplicationInfo>){

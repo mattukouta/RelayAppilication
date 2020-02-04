@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.relayapplication.dataclass.ApplicationInfo
@@ -32,13 +33,14 @@ class InstalledAppListFragment : Fragment(),
 
     lateinit var binding: FragmentInstalledAppListBinding
 
+    @SuppressLint("FragmentLiveDataObserve")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_installed_app_list, container, false)
-        binding.viewModel = ViewModelProviders.of(this).get(InstalledAppViewModel::class.java)
+        binding.viewModel = ViewModelProvider(this).get(InstalledAppViewModel::class.java)
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = activity?.applicationContext?.let {
             InstalledAppListAdapter(
@@ -55,10 +57,6 @@ class InstalledAppListFragment : Fragment(),
             adapter.setData(it)
         })
         this.binding = binding
-
-//        if (context is DialogListener) {
-//            listener = context as DialogListener
-//        }
 
         return binding.root
     }
