@@ -3,12 +3,14 @@ package com.example.relayapplication.selectapplist
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.relayapplication.callbacklistener.SelectAdapterListener
 import com.example.relayapplication.R
 import com.example.relayapplication.dataclass.SelectApplicationInfo
 import com.example.relayapplication.databinding.SelectedAppListItemBinding
+import kotlinx.android.synthetic.main.selected_app_list_item.view.*
 
 class SelectedAppListAdapter(var selectAppList: MutableList<SelectApplicationInfo>, val context: Context, val listener: SelectAdapterListener): RecyclerView.Adapter<SelectedAppListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectedAppListViewHolder {
@@ -38,6 +40,11 @@ class SelectedAppListAdapter(var selectAppList: MutableList<SelectApplicationInf
         holder.itemView.setOnClickListener {
             listener.onItemVIewClickListener(item)
         }
+
+        holder.itemView.deleteImage.setOnClickListener {
+            Toast.makeText(context, "DELETE", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     fun setData(items: MutableList<SelectApplicationInfo>){

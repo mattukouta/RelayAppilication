@@ -40,10 +40,6 @@ class InstalledAppListAdapter(var appList: MutableList<ApplicationInfo>, val con
         holder.itemView.setOnClickListener {
             listener.onItemVIewClickListener(appList[position])
         }
-
-//        holder.itemView.deleteImage.setOnClickListener {
-//            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
-//        }
     }
 
     fun setData(items: MutableList<ApplicationInfo>){
