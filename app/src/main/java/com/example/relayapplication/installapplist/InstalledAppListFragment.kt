@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.relayapplication.dataclass.ApplicationInfo
 import com.example.relayapplication.callbacklistener.EntryDialogListener
 import com.example.relayapplication.callbacklistener.InstallAdapterListener
-import com.example.relayapplication.entrydialog.EntryDialog
+import com.example.relayapplication.dialog.EntryDialog
 import com.example.relayapplication.R
 import com.example.relayapplication.SelectApp
 import com.example.relayapplication.dataclass.SelectApplicationInfo

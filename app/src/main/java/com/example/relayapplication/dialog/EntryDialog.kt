@@ -1,4 +1,4 @@
-package com.example.relayapplication.entrydialog
+package com.example.relayapplication.dialog
 
 import android.app.Dialog
 import android.os.Bundle
