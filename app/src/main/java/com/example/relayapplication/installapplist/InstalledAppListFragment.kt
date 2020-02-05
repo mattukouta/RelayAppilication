@@ -25,7 +25,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
-
 class InstalledAppListFragment : Fragment(),
     InstallAdapterListener,
     EntryDialogListener {
@@ -79,15 +78,24 @@ class InstalledAppListFragment : Fragment(),
      * 登録用のダイアログの"OK"クリック時
      */
     override fun addEntry(item: ApplicationInfo, entryName: String) {
-        SelectApp.selectAppList.add(
-            SelectApplicationInfo(
-                item.appName,
-                item.appIcon,
-                entryName,
-                item.packageName,
-                item.className
-            )
+        val appinfo = SelectApplicationInfo(
+            item.appName,
+            item.appIcon,
+            entryName,
+            item.packageName,
+            item.className
         )
+        var isContain = false
+
+        for (app in SelectApp.selectAppList) {
+            if (app.appName == item.appName) {
+                isContain = true
+            }
+        }
+
+        if (!isContain) {
+            SelectApp.selectAppList.add(appinfo)
+        }
     }
 
 
@@ -130,10 +138,5 @@ class InstalledAppListFragment : Fragment(),
 //            Log.d("checkList", packageList[0].toString())
             binding.viewModel!!.addList(packageList)
         }
-    }
-
-    // アプリ終了時など
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
