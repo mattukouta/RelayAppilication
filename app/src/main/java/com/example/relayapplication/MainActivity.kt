@@ -71,11 +71,10 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
 
-        Log.d("check", "onDestroy")
-
+        Log.d("check", "onPause")
         val realm = Realm.getDefaultInstance()
         val allItem = realm.where(SelectAppRealm::class.java).findAll()
 
@@ -99,5 +98,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         realm.close()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Log.d("check", "onDestroy")
     }
 }
