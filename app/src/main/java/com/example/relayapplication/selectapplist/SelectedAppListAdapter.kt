@@ -3,7 +3,6 @@ package com.example.relayapplication.selectapplist
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.relayapplication.callbacklistener.SelectAdapterListener
@@ -42,7 +41,7 @@ class SelectedAppListAdapter(var selectAppList: MutableList<SelectApplicationInf
         }
 
         holder.itemView.deleteImage.setOnClickListener {
-            Toast.makeText(context, "DELETE", Toast.LENGTH_SHORT).show()
+            listener.onDeleteButtonClickListener(item)
         }
 
     }

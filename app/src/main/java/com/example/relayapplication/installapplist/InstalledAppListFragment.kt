@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.relayapplication.dataclass.ApplicationInfo
 import com.example.relayapplication.callbacklistener.EntryDialogListener
@@ -73,14 +72,13 @@ class InstalledAppListFragment : Fragment(),
         item: ApplicationInfo
     ) {
         val dialog = EntryDialog(item, this)
-        fragmentManager?.let { dialog.show(it, "entry") }
+        activity?.supportFragmentManager?.let { dialog.show(it, "entry") }
     }
 
     /**
      * 登録用のダイアログの"OK"クリック時
      */
     override fun addEntry(item: ApplicationInfo, entryName: String) {
-
         SelectApp.selectAppList.add(
             SelectApplicationInfo(
                 item.appName,
@@ -90,7 +88,6 @@ class InstalledAppListFragment : Fragment(),
                 item.className
             )
         )
-
     }
 
 

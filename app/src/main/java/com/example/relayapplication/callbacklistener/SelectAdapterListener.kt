@@ -6,4 +6,8 @@ interface SelectAdapterListener {
     fun onItemVIewClickListener(
         item: SelectApplicationInfo
     )
+
+    fun onDeleteButtonClickListener(
+        item: SelectApplicationInfo
+    )
 }

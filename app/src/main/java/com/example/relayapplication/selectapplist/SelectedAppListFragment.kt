@@ -10,13 +10,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.relayapplication.callbacklistener.SelectAdapterListener
 import com.example.relayapplication.R
 import com.example.relayapplication.SelectApp
 import com.example.relayapplication.dataclass.SelectApplicationInfo
 import com.example.relayapplication.databinding.FragmentSelectedAppListBinding
+import android.os.Build
+import androidx.annotation.RequiresApi
+
 
 class SelectedAppListFragment : Fragment(),
     SelectAdapterListener {
@@ -32,7 +34,7 @@ class SelectedAppListFragment : Fragment(),
             DataBindingUtil.inflate(inflater,
                 R.layout.fragment_selected_app_list, container, false)
         binding.viewModel = ViewModelProvider(this).get(SelectedAppViewModel::class.java)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this@SelectedAppListFragment
         binding.recyclerView.adapter =
             activity?.applicationContext?.let {
                 SelectedAppListAdapter(
@@ -42,11 +44,10 @@ class SelectedAppListFragment : Fragment(),
                 )
             }
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        binding.viewModel!!.selectAppList.observe(this, Observer {
+        binding.viewModel!!.selectAppList.observe(this@SelectedAppListFragment, Observer {
             val adapter = binding.recyclerView.adapter as SelectedAppListAdapter
             adapter.setData(it)
         })
-        this.binding = binding
 
         return binding.root
     }
@@ -66,5 +67,11 @@ class SelectedAppListFragment : Fragment(),
         intent.action = "android.intent.category.LAUNCHER"
         intent.setClassName(item.packageName, item.packageClass)
         startActivity(intent)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override fun onDeleteButtonClickListener(item: SelectApplicationInfo) {
+        SelectApp.selectAppList.removeIf { it.appName == item.appName}
+        binding.viewModel!!.addSelectList(SelectApp.selectAppList)
     }
 }
