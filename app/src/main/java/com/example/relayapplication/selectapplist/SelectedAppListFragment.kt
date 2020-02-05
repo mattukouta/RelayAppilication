@@ -18,10 +18,13 @@ import com.example.relayapplication.dataclass.SelectApplicationInfo
 import com.example.relayapplication.databinding.FragmentSelectedAppListBinding
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.relayapplication.callbacklistener.DeleteDialogListener
+import com.example.relayapplication.dialog.DeleteDialog
 
 
 class SelectedAppListFragment : Fragment(),
-    SelectAdapterListener {
+    SelectAdapterListener,
+    DeleteDialogListener{
 
     lateinit var binding: FragmentSelectedAppListBinding
 
@@ -69,8 +72,14 @@ class SelectedAppListFragment : Fragment(),
         startActivity(intent)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onDeleteButtonClickListener(item: SelectApplicationInfo) {
+
+        val dialog = DeleteDialog(item, this)
+        activity?.supportFragmentManager?.let { dialog.show(it, "entry") }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override fun DeleteApp(item: SelectApplicationInfo) {
         SelectApp.selectAppList.removeIf { it.appName == item.appName}
         binding.viewModel!!.addSelectList(SelectApp.selectAppList)
     }
