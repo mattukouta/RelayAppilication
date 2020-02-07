@@ -1,4 +1,4 @@
-package com.example.relayapplication
+package com.example.relayapplication.service.repository
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

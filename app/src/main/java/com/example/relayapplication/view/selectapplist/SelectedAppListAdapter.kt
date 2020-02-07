@@ -1,13 +1,13 @@
-package com.example.relayapplication.selectapplist
+package com.example.relayapplication.view.selectapplist
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.relayapplication.callbacklistener.SelectAdapterListener
+import com.example.relayapplication.view.callbacklistener.SelectAdapterListener
 import com.example.relayapplication.R
-import com.example.relayapplication.dataclass.SelectApplicationInfo
+import com.example.relayapplication.service.model.SelectApplicationInfo
 import com.example.relayapplication.databinding.SelectedAppListItemBinding
 import kotlinx.android.synthetic.main.selected_app_list_item.view.*
 

@@ -1,4 +1,4 @@
-package com.example.relayapplication.selectapplist
+package com.example.relayapplication.view.selectapplist
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,15 +11,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.relayapplication.callbacklistener.SelectAdapterListener
+import com.example.relayapplication.view.callbacklistener.SelectAdapterListener
 import com.example.relayapplication.R
-import com.example.relayapplication.SelectApp
-import com.example.relayapplication.dataclass.SelectApplicationInfo
+import com.example.relayapplication.service.repository.SelectApp
+import com.example.relayapplication.service.model.SelectApplicationInfo
 import com.example.relayapplication.databinding.FragmentSelectedAppListBinding
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.relayapplication.callbacklistener.DeleteDialogListener
-import com.example.relayapplication.dialog.DeleteDialog
+import com.example.relayapplication.view.callbacklistener.DeleteDialogListener
+import com.example.relayapplication.view.dialog.DeleteDialog
+import com.example.relayapplication.viewmodel.SelectedAppViewModel
 
 
 class SelectedAppListFragment : Fragment(),
@@ -73,14 +74,12 @@ class SelectedAppListFragment : Fragment(),
     }
 
     override fun onDeleteButtonClickListener(item: SelectApplicationInfo) {
-
         val dialog = DeleteDialog(item, this)
         activity?.supportFragmentManager?.let { dialog.show(it, "entry") }
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun DeleteApp(item: SelectApplicationInfo) {
-        SelectApp.selectAppList.removeIf { it.appName == item.appName}
-        binding.viewModel!!.addSelectList(SelectApp.selectAppList)
+        binding.viewModel.appDelete(item)
     }
 }

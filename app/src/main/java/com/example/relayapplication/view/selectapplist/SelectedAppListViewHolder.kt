@@ -1,4 +1,4 @@
-package com.example.relayapplication.selectapplist
+package com.example.relayapplication.view.selectapplist
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.relayapplication.databinding.SelectedAppListItemBinding

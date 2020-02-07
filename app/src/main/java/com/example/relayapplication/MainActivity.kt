@@ -13,7 +13,9 @@ import android.graphics.drawable.BitmapDrawable
 import java.io.ByteArrayOutputStream
 import android.graphics.BitmapFactory
 import androidx.core.graphics.drawable.toBitmap
-import com.example.relayapplication.dataclass.SelectApplicationInfo
+import com.example.relayapplication.service.model.SelectApplicationInfo
+import com.example.relayapplication.service.repository.SelectApp
+import com.example.relayapplication.service.repository.SelectAppRealm
 
 
 class MainActivity : AppCompatActivity() {

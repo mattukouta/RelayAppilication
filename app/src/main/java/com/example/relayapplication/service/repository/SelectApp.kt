@@ -1,6 +1,6 @@
-package com.example.relayapplication
+package com.example.relayapplication.service.repository
 
-import com.example.relayapplication.dataclass.SelectApplicationInfo
+import com.example.relayapplication.service.model.SelectApplicationInfo
 
 class SelectApp {
     companion object {
