@@ -11,7 +11,7 @@
 
         <fragment
             android:id="@+id/navigationView"
-            android:name="com.example.relayapplication.customnavigation.CustomNavHostFragment"
+            android:name="com.example.relayapplication.view.customnavigation.CustomNavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"

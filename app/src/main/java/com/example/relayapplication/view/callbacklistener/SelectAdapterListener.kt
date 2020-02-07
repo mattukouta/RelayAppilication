@@ -1,6 +1,6 @@
-package com.example.relayapplication.callbacklistener
+package com.example.relayapplication.view.callbacklistener
 
-import com.example.relayapplication.dataclass.SelectApplicationInfo
+import com.example.relayapplication.service.model.SelectApplicationInfo
 
 interface SelectAdapterListener {
     fun onItemVIewClickListener(

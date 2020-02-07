@@ -7,7 +7,7 @@
 
     <custom_fragment
         android:id="@+id/InstalledAppListFragment"
-        android:name="com.example.relayapplication.installapplist.InstalledAppListFragment"
+        android:name="com.example.relayapplication.view.installapplist.InstalledAppListFragment"
         android:label="fragment_installList"
         android:tag = "tab1">
 <!--        tools:layout="@layout/fragment_installed_app_list" >-->
@@ -18,7 +18,7 @@
 
     <custom_fragment
         android:id="@+id/SelectedAppListFragment"
-        android:name="com.example.relayapplication.selectapplist.SelectedAppListFragment"
+        android:name="com.example.relayapplication.view.selectapplist.SelectedAppListFragment"
         android:label="fragment_selectedList"
         android:tag = "tab2">
 <!--        tools:layout="@layout/fragment_selected_app_list" >-->

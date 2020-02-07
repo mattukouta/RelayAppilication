@@ -8,13 +8,13 @@
 
         <variable
             name="viewModel"
-            type="com.example.relayapplication.installapplist.InstalledAppViewModel" />
+            type="com.example.relayapplication.viewmodel.InstalledAppViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".installapplist.InstalledAppListFragment">
+        tools:context=".view.installapplist.InstalledAppListFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

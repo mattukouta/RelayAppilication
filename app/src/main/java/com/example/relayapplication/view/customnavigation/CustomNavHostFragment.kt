@@ -1,4 +1,4 @@
-package com.example.relayapplication.customnavigation
+package com.example.relayapplication.view.customnavigation
 
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator

@@ -1,4 +1,4 @@
-package com.example.relayapplication.dialog
+package com.example.relayapplication.view.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.example.relayapplication.dataclass.ApplicationInfo
-import com.example.relayapplication.callbacklistener.EntryDialogListener
+import com.example.relayapplication.service.model.ApplicationInfo
+import com.example.relayapplication.view.callbacklistener.EntryDialogListener
 import com.example.relayapplication.R
 
 

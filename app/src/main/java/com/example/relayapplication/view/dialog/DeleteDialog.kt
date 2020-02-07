@@ -1,4 +1,4 @@
-package com.example.relayapplication.dialog
+package com.example.relayapplication.view.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.relayapplication.R
-import com.example.relayapplication.callbacklistener.DeleteDialogListener
-import com.example.relayapplication.dataclass.SelectApplicationInfo
+import com.example.relayapplication.view.callbacklistener.DeleteDialogListener
+import com.example.relayapplication.service.model.SelectApplicationInfo
 
 class DeleteDialog(val item: SelectApplicationInfo, val listener: DeleteDialogListener) : DialogFragment() {
 

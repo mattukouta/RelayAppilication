@@ -1,4 +1,4 @@
-package com.example.relayapplication.customnavigation
+package com.example.relayapplication.view.customnavigation
 
 import android.content.Context
 import android.os.Bundle
@@ -7,7 +7,6 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
-import com.example.relayapplication.SelectApp
 
 @Navigator.Name("custom_fragment")
 class CustomNavigator(
